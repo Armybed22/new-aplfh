@@ -1,0 +1,9 @@
+class System {
+    f System() {
+        v this.name = "Linux"
+        v this.version = "1.0"
+    }
+    f getInfo() {
+        return "System: " + this.name + " " + this.version
+    }
+}

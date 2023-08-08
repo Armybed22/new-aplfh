@@ -1,0 +1,30 @@
+# This is a very useful piece of software
+
+
+f join(elements, separator)
+    v result = ""
+    v length = arrlen(elements)
+
+    for i = 0 to length t
+        v result = result + elements/i
+        if i != length - 1 t v result = result + separator
+    end
+
+    return result
+end
+
+f map(elements, func)
+    v new_elements = []
+
+    for i = 0 to arrlen(elements) t
+        append(new_elements, func(elements/i))
+    end
+
+    return new_elements
+end
+
+op("Greetings universe!")
+
+for i = 0 to 5 t
+    op(join(map(["l", "sp"], oopify), ", "))
+end

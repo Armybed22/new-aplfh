@@ -1,0 +1,74 @@
+include Array
+
+class Argparser {
+    f Argparser(name, help) {
+
+        # Program name
+        v this.name = name 
+        
+        # Program help text
+        this.help = help
+        
+        # Command line arguments
+        v this.args = sys_args()
+
+        # Added command lists
+        v this.commands = []
+    }
+
+    f to_string() -> "<class 'Argparser'>"
+
+    # This will return the main arguments which has been passed by the user
+    f get_args() -> slice(this.args, 3, len(this.args))
+    
+    f add_command(name, help, nargs, action) {
+        # param: name is like -n or --name line argument
+        # param: help is for the help text to be printed
+        # param: nargs is number of args to accept 0-?
+        # param: action for a call back function which will take a single argument
+
+        append(this.commands, [name, help, nargs, action])
+    }
+
+    # Returns all selected commands
+    f get_commands() -> this.commands
+
+    f get_help() {
+        # This will return the help text for -h or --help argument
+
+        v file_name = str(find(args, 2))
+        v title = "usage: " + file_name + "\n\n" + name + "\n\n"
+        v options = "options: "
+
+        return title + options
+    }
+
+    f parse() {
+        # Loop all the commands from module
+        for i=0 to len(this.get_commands()) {
+
+            # Get the commands array
+            v cmd = find(this.get_commands(), i)
+
+            # Get the name of the command as an array
+            v final_arg = slice(cmd, 0, 1)
+
+            # Get the input command name as array
+            v g_arg = slice(this.get_args(), 0, 1)
+            
+            if final_arg == g_arg {
+                op("Got it")
+
+                # v action = find(cmd, 3)
+                # v n = find(cmd, 2)
+                # op(n)
+                # if n != 0 {
+                #     for i=0 to int(n) {
+                #         op(i)
+                #     }
+                # }
+            }
+        }
+    }
+
+}

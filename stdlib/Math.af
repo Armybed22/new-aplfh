@@ -1,0 +1,74 @@
+# The Math class provides all types of math functionalites for radon language.
+
+class Math {
+    f Math() {
+        v this.PI = 3.14159265358979323846
+    }
+
+    f to_string() -> "<class 'math'>"
+    f sqrt(number) -> number ^ 0.5
+    f pow(base, power) -> base ^ power
+    f mod(a, b) -> a % b
+
+    f factorial(number) {
+        if number == 0 {
+            return 1
+        } 
+        return number * factorial(number - 1)
+    }
+    
+    # Same as mod, but implemented in pure radon.
+    f modulas(a, b) {
+        v frac = a / b
+        if frac > 0 {
+            v floor = int(frac) 
+        } else {
+            v floor = int(frac - 0.9999999999999999)
+        }
+        return a - b * floor
+    }
+
+    # Same as pow, but implemented in pure aplfh.
+    f power(n, p) {
+        v result = n
+        for i=1 to p {
+            v result = result * n
+        }
+        return result
+    }
+
+    # Sine implementation in aplfh.
+    f sin(n) {
+        v n = n % (2 * this.PI)
+        
+        if n < 0 {
+            v n = 2 * this.PI - n
+        }
+
+        v sign = 1
+        if n > this.PI {
+            v n = n - this.PI
+            v sign = -1
+        }
+
+        v result = n
+        v coefficient = 3
+
+        for i=0 to 10 {
+            v pow_val = n ^ coefficient
+            v frac = factorial(coefficient)
+            
+            if i % 2 == 0{
+                v result = result - (pow_val / frac)
+            } else {
+
+                v result = result + (pow_val / frac)
+            }
+            
+            v coefficient = coefficient + 2
+        }
+        return sign * result
+    }
+
+
+}

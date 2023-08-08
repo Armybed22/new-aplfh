@@ -1,0 +1,42 @@
+##################################
+# Testing stdlib Math library
+##################################
+
+# lib("Math")
+
+# v math = Math()
+# op(math.PI) # legally
+
+# op(Math().PI) not legally
+
+
+##################################
+# Testing System library
+##################################
+
+# lib("System")
+
+# v sys = System()
+# op(sys.getInfo())
+
+
+##################################
+# Testing external library
+##################################
+
+# lib("simple.af")
+
+
+##################################
+# Testing String library
+##################################
+
+# lib("String")
+
+include "String"
+
+v data = "Hello World !"
+v str = String(data)
+
+op(str.length())
+

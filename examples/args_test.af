@@ -1,0 +1,21 @@
+include Argparser
+
+v parser = Argparser("Utility Tool", "A simple utility tool.")
+
+# Callback function
+f version() -> "1.0.0"
+f author() -> "Mukhanbetkaliev Alikhan"
+
+# Add commands
+parser.add_command("-v", "Version information", 0, version)
+parser.add_command("-a", "About author", 0, author)
+
+# Get args lists
+# op(parser.get_args())
+
+# Get help text
+# op(parser.get_help())
+
+# op(parser.get_commands())
+
+parser.parse()

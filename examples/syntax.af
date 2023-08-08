@@ -1,0 +1,102 @@
+# This is a comment
+
+# Arithmetic operators
+# + - Addition
+# - - Subtraction
+# * - Multiplication
+# / - Division
+# % - Modulus
+# ^ - Exponentiation
+
+# Comparison operators
+# == - Equal to
+# != - Not equal to
+# > - Greater than
+# < - Less than
+# >= - Greater than or equal to
+# <= - Less than or equal to
+
+# Logical operators
+# and - Logical and
+# or - Logical or
+# not - Logical not
+
+# Assignment operators (Development)
+# = - Assign
+# += - Add and assign
+# -= - Subtract and assign
+# *= - Multiply and assign
+# /= - Divide and assign
+# %= - Modulus and assign
+# ^= - Exponentiation and assign
+
+# Variable definition
+v a = 10
+v b = 20
+op(a + b) # 30
+
+v c = "Hello"
+v d = "World"
+op(c + " " + d) # Hello World
+
+# Conditional statement
+if a > b {
+    op("a is greater than b")
+} elif a < b {
+    op("a is less than b")
+} else {
+    op("a is equal to b")
+}
+
+# For loop
+v x = 9 # Multiplication table of 9
+
+for i = 1 to 11 {
+    op(str(x) + " X " + str(i) + " = " + str(x * i))
+}
+
+# While loop
+while x > 0 {
+    op(x)
+    v x = x - 1
+}
+
+# Function definition
+f add(a, b) {
+    return a + b
+}
+
+op(add(10, 20)) # 30
+
+# Anonymous function
+v sub = f (a, b) {
+    return a - b
+}
+
+op(sub(20, 10)) # 10
+
+# Single line function
+f mul(a, b) -> a * b
+op(mul(10, 20)) # 200
+
+# Class definition
+class Person {
+    # Constructor
+    f Person(name, age) {
+        v this.name = name
+        v this.age = age
+    }
+
+    f get_name() {
+        return this.name
+    }
+
+    f get_age() {
+        return this.age
+    }
+}
+
+# Use a class
+v person = Person("Alikhan", 11)
+v details = "Name is : " + person.get_name() + ", Age : " + str(person.get_age())
+op(details)

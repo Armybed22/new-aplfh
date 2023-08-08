@@ -1,0 +1,21 @@
+include Array
+
+v arr = Array([1,2,3,4,5,6,7,8,9,10])
+arr.append(11)
+op(arr.to_string())
+
+arr.pop(0)
+op(arr.to_string())
+
+op(arr.len())
+
+# arr.extend(["this", "is", "a", "array"])
+# op(arr.to_string())
+
+op(arr.find(6))
+
+f double(a) -> a * a
+op(arr.map(double))
+
+op(arr.to_string())
+op(arr.slice(0, 5))

@@ -1,0 +1,27 @@
+
+    # Linear search algorithm
+    f find(list, value) {
+        for i = 0 to len(list) {
+            if i == value {
+                return i
+            }
+        }
+        return -1
+    }
+
+    # v list = [1, 2, 3, 4, 5]
+    # v index = find(list, 3)
+    # op(index)
+
+    f iseven(num) -> if (num%2) == 0 { op("even") } else { op("odd") }
+
+    class Algorithm {
+        f find(list, value) {
+            for i = 0 to len(list) {
+                if i == value {
+                    return i
+                }
+            }
+            return -1
+        }
+    }
