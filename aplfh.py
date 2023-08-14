@@ -1,6 +1,18 @@
+#!/usr/bin/python3.11
 # By: Mukhanbetkaliev Alikhan
 
 import argparse
+
+try:
+    import readline
+
+    # Enable arrow key support
+    readline.parse_and_bind('"\e[A": history-search-backward')
+    readline.parse_and_bind('"\e[B": history-search-forward')
+    readline.parse_and_bind('"\e[C": forward-char')
+    readline.parse_and_bind('"\e[D": backward-char')
+except ImportError:
+    pass
 
 import core as base_core
 
@@ -55,7 +67,7 @@ args = parser.parse_args()
 
 if args.source:
     result, error, should_exit = base_core.run(
-        '<stdin>', f'lib("{args.source[0]}")')
+        '<stdin>', f'require("{args.source[0]}")')
 
     if error:
         print(error.as_string())

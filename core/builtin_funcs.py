@@ -13,6 +13,17 @@ class BuiltInFunction(BaseFunction):
         super().__init__(name)
 
     def execute(self, args):
+        """
+        execute _summary_
+
+        _extended_summary_
+
+        Arguments:
+            args {_type_} -- _description_
+
+        Returns:
+            _type_ -- _description_
+        """
         res = RTResult()
         exec_ctx = self.generate_new_context()
 

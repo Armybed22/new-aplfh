@@ -52,4 +52,10 @@ class String {
     # Return the length of the string
     # f len() -> return str_len(this.value)
     f to_string() -> this.value
+    f toUpperCase() {
+        return this.value.ascii_uppercase
+    }
+    f toLowerCase() {
+        return this.value.ascii_lowercase
+    }
 }

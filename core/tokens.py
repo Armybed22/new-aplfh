@@ -26,15 +26,6 @@ class Position:
     '''Cursor Position'''
 
     def __init__(self, idx, ln, col, fn, ftxt):
-        """_summary_
-
-        Args:
-            idx (_type_): _description_
-            ln (_type_): _description_
-            col (_type_): _description_
-            fn (function): _description_
-            ftxt (_type_): _description_
-        """
         self.idx = idx
         self.ln = ln
         self.col = col
@@ -42,14 +33,6 @@ class Position:
         self.ftxt = ftxt
 
     def advance(self, current_char=None):
-        """_summary_
-
-        Args:
-            current_char (_type_, optional): _description_. Defaults to None.
-
-        Returns:
-            _type_: _description_
-        """
         self.idx += 1
         self.col += 1
 
@@ -60,11 +43,6 @@ class Position:
         return self
 
     def copy(self):
-        """_summary_
-
-        Returns:
-            _type_: _description_
-        """
         return Position(self.idx, self.ln, self.col, self.fn, self.ftxt)
 
 
@@ -73,7 +51,7 @@ TT_INT = 'INT'  # 123456
 TT_FLOAT = 'FLOAT'  # 5.5
 TT_STRING = 'STRING'  # "Hello World"
 TT_IDENTIFIER = 'IDENTIFIER'  # var_name
-TT_KEYWORD = 'KEYWORD'  # v, if, for, while, f
+TT_KEYWORD = 'KEYWORD'  # var, if, for, while, fun
 TT_PLUS = 'PLUS'  # Plus
 TT_MINUS = 'MINUS'  # Minus
 TT_MUL = 'MUL'  # Times
@@ -106,6 +84,7 @@ TT_ARROW = 'ARROW'  # ->
 TT_NEWLINE = 'NEWLINE'  # \n
 TT_DOT = 'DOT'  # .
 TT_EOF = 'EOF'  # End Of File
+TT_SLICE = 'SLICE'  # x[1:2:3]
 
 KEYWORDS = [
     'v',
@@ -130,14 +109,6 @@ KEYWORDS = [
 
 class Token:
     def __init__(self, type_, value=None, pos_start=None, pos_end=None):
-        """_summary_
-
-        Args:
-            type_ (_type_): _description_
-            value (_type_, optional): _description_. Defaults to None.
-            pos_start (_type_, optional): _description_. Defaults to None.
-            pos_end (_type_, optional): _description_. Defaults to None.
-        """
         self.type = type_
         self.value = value
 
@@ -150,23 +121,9 @@ class Token:
             self.pos_end = pos_end.copy()
 
     def matches(self, type_, value):
-        """_summary_
-
-        Args:
-            type_ (_type_): _description_
-            value (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
         return self.type == type_ and self.value == value
 
     def __repr__(self):
-        """_summary_
-
-        Returns:
-            _type_: _description_
-        """
         if self.value:
             return f'{self.type}:{self.value}'
         return f'{self.type}'

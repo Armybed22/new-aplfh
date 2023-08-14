@@ -13,14 +13,9 @@ class Lexer:
     def advance(self):
         self.pos.advance(self.current_char)
         self.current_char = self.text[self.pos.idx] if self.pos.idx < len(
-        self.text) else None
+            self.text) else None
 
     def make_tokens(self):
-        """_summary_
-
-        Returns:
-            _type_: _description_
-        """
         tokens = []
 
         while self.current_char != None:
@@ -83,6 +78,7 @@ class Lexer:
                 tokens.append(Token(TT_RBRACE, pos_start=self.pos))
                 self.advance()
             elif self.current_char == '[':
+                # tokens.append(self.make_slice())
                 tokens.append(Token(TT_LSQUARE, pos_start=self.pos))
                 self.advance()
             elif self.current_char == ']':
@@ -115,7 +111,6 @@ class Lexer:
         return tokens, None
 
     def make_number(self):
-
         num_str = ''
         dot_count = 0
         pos_start = self.pos.copy()
@@ -174,6 +169,26 @@ class Lexer:
 
         tok_type = TT_KEYWORD if id_str in KEYWORDS else TT_IDENTIFIER
         return Token(tok_type, id_str, pos_start, self.pos)
+
+    def make_slice(self):
+        pos_start = self.pos.copy()
+        self.advance()
+
+        if self.current_char in DIGITS:
+            start = self.make_number()
+            if self.current_char == ':':
+                self.advance()
+                end = self.make_number()
+                if self.current_char == ':':
+                    self.advance()
+                    step = self.make_number()
+                    if self.current_char == ']':
+                        self.advance()
+                        return Token(TT_SLICE, (start, end, step), pos_start, self.pos)
+                    return Token(TT_SLICE, (start, end, step), pos_start, self.pos), ExpectedCharError(pos_start, self.pos, "']'")
+                return Token(TT_SLICE, (start, end, None), pos_start, self.pos), ExpectedCharError(pos_start, self.pos, "']'")
+            return Token(TT_SLICE, (start, None, None), pos_start, self.pos), ExpectedCharError(pos_start, self.pos, "']'")
+        return Token(TT_SLICE, (None, None, None), pos_start, self.pos), ExpectedCharError(pos_start, self.pos, "']'")
 
     # def make_minus_or_arrow(self):
     #     tok_type = TT_MINUS

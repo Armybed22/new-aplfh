@@ -7,7 +7,6 @@ class ParseResult:
     '''Parser Result'''
 
     def __init__(self):
-
         self.error = None
         self.node = None
         self.last_registered_advance_count = 0
@@ -15,7 +14,6 @@ class ParseResult:
         self.to_reverse_count = 0
 
     def register_advancement(self):
-
         self.last_registered_advance_count = 1
         self.advance_count += 1
 
@@ -74,7 +72,6 @@ class Parser:
     ###################################
 
     def statements(self):
-        
         res = ParseResult()
         list_statements = []
         pos_start = self.current_tok.pos_start.copy()

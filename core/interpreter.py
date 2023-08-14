@@ -91,15 +91,6 @@ class Interpreter:
         return res.success(value)
 
     def visit_VarAssignNode(self, node, context):
-        """_summary_
-
-        Args:
-            node (_type_): _description_
-            context (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
         res = RTResult()
         var_name = node.var_name_tok.value
         value = res.register(self.visit(node.value_node, context))
@@ -145,15 +136,6 @@ class Interpreter:
         return res.success(value)
 
     def visit_VarManipulateNode(self, node, context):
-        """_summary_
-
-        Args:
-            node (_type_): _description_
-            context (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
         res = RTResult()
         var_name = node.var_name_tok.value
         value = context.symbol_table.get(var_name)
@@ -187,15 +169,6 @@ class Interpreter:
         return res.success(value)
 
     def visit_IncludeNode(self, node, context):
-        """_summary_
-
-        Args:
-            node (_type_): _description_
-            context (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
         res = RTResult()
         exec_ctx = context
 
@@ -204,7 +177,7 @@ class Interpreter:
         try:
             if module not in STDLIBS:
                 file_extension = module.split("/")[-1].split('.')[-1]
-                if file_extension != "af":
+                if file_extension != "rn":
                     return res.failure(RTError(
                         node.pos_start, node.pos_end,
                         "A Aplfh script must have a .af extension",
@@ -220,7 +193,7 @@ class Interpreter:
                 module = os.path.join(CURRENT_DIR, module_file)
             else:
                 # For STDLIB modules
-                module = os.path.join(BASE_DIR, 'stdlib', f'{module}.rn')
+                module = os.path.join(BASE_DIR, 'stdlib', f'{module}.af')
 
             with open(module, "r") as f:
                 script = f.read()
