@@ -130,8 +130,20 @@ class Interpreter:
                     ))
 
             prev.symbol_table.set(name, value)
+            if context.symbol_table.is_constant(var_name):
+                return RTResult().failure(RTError(
+                    node.var_name_tok.pos_start, node.var_name_tok.pos_end,
+                    f"Cannot reassign constant '{var_name}'",
+                    context
+                ))
             return res.success(value)
 
+        value = self.visit(node.value_node, context)
+        if value.error:
+            return value
+
+        context.symbol_table.set(var_name, value.value)
+        return value
         context.symbol_table.set(var_name, value)
         return res.success(value)
 
@@ -177,7 +189,7 @@ class Interpreter:
         try:
             if module not in STDLIBS:
                 file_extension = module.split("/")[-1].split('.')[-1]
-                if file_extension != "rn":
+                if file_extension != "af":
                     return res.failure(RTError(
                         node.pos_start, node.pos_end,
                         "A Aplfh script must have a .af extension",
@@ -217,6 +229,24 @@ class Interpreter:
         if should_exit:
             return RTResult().success_exit(Number.null)
         return RTResult().success(Number.null)
+    
+   
+    def visit_DefineNode(self, node, context):
+        res = RTResult()
+
+        var_name = node.var_name_tok.value
+
+        if node.value_node:
+            value = res.register(self.visit(node.value_node, context))
+            if res.should_return():
+                return res
+        else:
+            value = None
+
+        context.symbol_table.set(var_name, value)
+        return res.success(value)
+
+
 
     def visit_BinOpNode(self, node, context):
         res = RTResult()

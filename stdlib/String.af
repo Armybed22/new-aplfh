@@ -15,10 +15,12 @@ class String {
         v this.tab = "    "
     }
 
-    # TODO: Need to fix
+
+    #TODO: Need to fix;
+
     #f join(separator) {
     #    v result = ""
-
+    #
     #    for i = 0 to str_len(this.value) {
     #        result = result + this.value[i]
     #        if i < str_len(this.value) - 1 {
@@ -52,10 +54,4 @@ class String {
     # Return the length of the string
     # f len() -> return str_len(this.value)
     f to_string() -> this.value
-    f toUpperCase() {
-        return this.value.ascii_uppercase
-    }
-    f toLowerCase() {
-        return this.value.ascii_lowercase
-    }
 }

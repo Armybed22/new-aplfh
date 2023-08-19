@@ -104,6 +104,7 @@ KEYWORDS = [
     'break',
     'class',
     'include',
+    'define',
 ]
 
 

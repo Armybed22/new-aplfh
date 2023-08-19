@@ -205,7 +205,31 @@ class Parser:
             self.advance()
 
             return res.success(IncludeNode(file_name))
+        elif self.current_tok.matches(TT_KEYWORD, 'define'):
+            res.register_advancement()
+            self.advance()
 
+            if self.current_tok.type != TT_IDENTIFIER:
+                return res.failure(InvalidSyntaxError(
+                    self.current_tok.pos_start, self.current_tok.pos_end,
+                    "Expected identifier"
+                ))
+
+            var_name_tok = self.current_tok
+            res.register_advancement()
+            self.advance()
+
+            if self.current_tok.type == TT_EQ:
+                res.register_advancement()
+                self.advance()
+
+                value = res.register(self.expr())
+                if res.error:
+                    return res
+            else:
+                value = None
+
+            return res.success(DefineNode(var_name_tok, value))
         node = res.register(self.bin_op(
             self.comp_expr, ((TT_KEYWORD, 'and'), (TT_KEYWORD, 'or'))))
 
@@ -1037,6 +1061,7 @@ class SymbolTable:
     def __init__(self, parent=None):
         self.symbols = {}
         self.parent = parent
+        self.constants = set()
 
     def get(self, name):
         value = self.symbols.get(name, None)
@@ -1044,8 +1069,13 @@ class SymbolTable:
             return self.parent.get(name)
         return value
 
-    def set(self, name, value):
+    def set(self, name, value, constant=False):
         self.symbols[name] = value
+        if constant:
+            self.constants.add(name)
 
     def remove(self, name):
         del self.symbols[name]
+    
+    def is_constant(self, name):
+        return name in self.constants
