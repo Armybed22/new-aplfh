@@ -100,6 +100,19 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(Number.null)
     execute_clear.arg_names = []
 
+    def execute_os(self, exec_ctx):
+        arg1 = exec_ctx.symbol_table.get("arg1")
+        try:
+            os.system(str(arg1))
+        except:
+            return RTResult().failure(RTError(
+                    self.pos_start, self.pos_end,
+                    "Couldn`t find argument ",
+                    exec_ctx
+                ))
+        return RTResult().success(Number.null)
+    execute_os.arg_names = ["arg1"]
+
     def execute_is_num(self, exec_ctx):
         is_number = isinstance(exec_ctx.symbol_table.get("value"), Number)
         return RTResult().success(Boolean.true if is_number else Boolean.false)
@@ -588,6 +601,7 @@ BuiltInFunction.op_ret = BuiltInFunction("op_ret")
 BuiltInFunction.rd = BuiltInFunction("rd")
 BuiltInFunction.rd_int = BuiltInFunction("rd_int")
 BuiltInFunction.clear = BuiltInFunction("clear")
+BuiltInFunction.os = BuiltInFunction("os")
 
 BuiltInFunction.is_num = BuiltInFunction("is_num")
 BuiltInFunction.is_int = BuiltInFunction("is_int")
@@ -630,6 +644,7 @@ global_symbol_table.set("rd", BuiltInFunction.rd)
 global_symbol_table.set("rd_int", BuiltInFunction.rd_int)
 global_symbol_table.set("clear", BuiltInFunction.clear)
 global_symbol_table.set("cls", BuiltInFunction.clear)
+global_symbol_table.set("os", BuiltInFunction.os)
 global_symbol_table.set("lib", BuiltInFunction.lib)
 global_symbol_table.set("exit", BuiltInFunction.exit)
 # Datatype validator methods
