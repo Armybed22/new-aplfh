@@ -1,4 +1,4 @@
-# The Math class provides all types of math functionalites for radon language.
+# The Math class provides all types of math functionalites for aplfh language.
 
 class Math {
     f Math() {
@@ -17,7 +17,7 @@ class Math {
         return number * factorial(number - 1)
     }
     
-    # Same as mod, but implemented in pure radon.
+    # Same as mod, but implemented in pure aplfh.
     f modulas(a, b) {
         v frac = a / b
         if frac > 0 {
