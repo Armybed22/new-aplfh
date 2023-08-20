@@ -527,7 +527,7 @@ class BuiltInFunction(BaseFunction):
                 module = os.path.join(CURRENT_DIR, module_file)
             else:
                 # For STDLIB modules
-                module = os.path.join(BASE_DIR, 'stdlib', f'{module}.rn')
+                module = os.path.join(BASE_DIR, 'stdlib', f'{module}.af')
 
             with open(module, "r") as f:
                 script = f.read()

@@ -144,7 +144,6 @@ class Interpreter:
 
         context.symbol_table.set(var_name, value.value)
         return value
-        context.symbol_table.set(var_name, value)
         return res.success(value)
 
     def visit_VarManipulateNode(self, node, context):
