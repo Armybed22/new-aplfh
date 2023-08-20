@@ -1,4 +1,4 @@
-#include <stdlib.h>
+include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -24,18 +24,40 @@ char* concat(char *s1, char *s2)
 int main(int argc, char *argv[])
 {
 	printf("%d",argc);
-	if (argc == 1)
-	{
-		system("python3 aplfh.py");
-		return 0;
-	}
 
-	if (argc > 2)
+	char* ostype = getenv("OSTYPE");
+	if (ostype == NULL)
 	{
-		printf("Error, too many arguments");
-		return 0;
+	   if (argc == 1)
+	   		{
+	   			system("python aplfh.py");
+	   			return 0;
+	   		}
+	   
+	   		if (argc > 2)
+	   		{
+	   			printf("Error, too many arguments");
+	   			return 0;
+	   		}
+	   		char *s = concat("python aplfh.py ", argv[1]);
+	   		system(s);
 	}
-	char *s = concat("python3 aplfh.py ", argv[1]);
-	system(s);
+	else
+	{     	
+		if (argc == 1)
+		{
+			system("python3 aplfh.py");
+			return 0;
+		}
+
+		if (argc > 2)
+		{
+			printf("Error, too many arguments");
+			return 0;
+		}
+		char *s = concat("python3 aplfh.py ", argv[1]);
+		system(s);
+	}
+	
 	return 0;
 }
