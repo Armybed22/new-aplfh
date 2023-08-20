@@ -29,6 +29,12 @@ int main(int argc, char *argv[])
 		system("python3 aplfh.py");
 		return 0;
 	}
+
+	if (argc > 2)
+	{
+		printf("Error, too many arguments");
+		return 0;
+	}
 	char *s = concat("python3 aplfh.py ", argv[1]);
 	system(s);
 	return 0;
