@@ -1,0 +1,23 @@
+#//Test been maded by Atlas17480
+#//Type: v a = OverloadMethods()
+
+class OverloadMethods{
+    #//Test for check overload methods
+    f OverloadMethods(){
+        op("Type: a.runTest()")
+    }
+
+    f testM(){
+        op("Ok")
+    }
+
+    f testM(a){
+        op(a)
+    }
+
+    f runTest(){
+        this.testM()
+        this.testM("Ok")
+        op("If yoy see 2 Ok, then overloading in aplfh is working!")
+    }
+}

@@ -1,9 +1,14 @@
 class System {
-    f System() {
-        v this.name = "Linux"
+    f System(){
+        v this.name = "linux"
         v this.version = "1.0"
     }
+
     f getInfo() {
+        os("python3 osname.py")
+        include "buffer.af"
+        v this.name = nameos
+        
         return "System: " + this.name + " " + this.version
     }
 }

@@ -68,7 +68,12 @@ class Math {
             v coefficient = coefficient + 2
         }
         return sign * result
+    
     }
 
-
+    f MultiComplex(r1, i1, r2, i2){
+        v multR = r1 * r2 - i1 * i2
+        v multI = i1 * r2 + r1 * i2
+        return [multR, multI]
+    }
 }
