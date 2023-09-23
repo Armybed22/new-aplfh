@@ -7,4 +7,4 @@ Github: @Armybed22
 
 from core.builtin_funcs import run
 
-__version__ = '0.0.1'
+__version__ = '0.2.2'
