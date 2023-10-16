@@ -122,7 +122,8 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(String("Данные успешно записаны в файл."))
     execute_writef.arg_names = ["file_name"]
 
-    def execute_readf(file_name):
+    def execute_readf(self, exe_ctx):
+        file_name = exec_ctx.symbol_table.get("file_name")
         try:
             with open(file_name, 'r') as file:
                 content = file.read()
