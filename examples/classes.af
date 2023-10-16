@@ -1,35 +1,7 @@
-class Person {
-	f Person(name) {
+class Test{
+    f Test(name){
 		v this.name = name
-	}
-	f Format() {
-		return "My name is " + this.name + "."
-	}
-	f single_line() -> "This is a single line method"
-}
-
-op("Enter a name, or type 'exit' to quit.")
-v inp = rd("Name: ")
-
-while inp != "exit" {
-	v p = Person(inp)
-	op(p.Format())
-	v inp = rd("Name: ")
-	p.single_line()
-}
-
-exit()
-op("This message will never ever show up! Isn't that wacky?!")
-
-
-class Some {
-    f Some() {
-        v this.name = "something"
-        v this.value = 45
+        op(name)
     }
-    f to_object() -> "Name is : "+ this.name + " Value is : "+ str(this.value)
 }
-
-v cls_ = Some()
-v obj = cls_.to_object()
-op(obj)
+v a = Test("pensil")

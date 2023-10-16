@@ -112,7 +112,24 @@ class BuiltInFunction(BaseFunction):
                 ))
         return RTResult().success(Number.null)
     execute_os.arg_names = ["arg1"]
+    def execute_writef(self, exec_ctx):
+        file_name = exec_ctx.symbol_table.get("file_name")
+        try:
+            with open(file_name, 'w') as file:
+                file.write(data)
+        except Exception as e:
+            return f"Ошибка при записи в файл: {str(e)}"
+        return RTResult().success(String("Данные успешно записаны в файл."))
+    execute_writef.arg_names = ["file_name"]
 
+    def readf(file_name):
+        try:
+            with open(file_name, 'r') as file:
+                content = file.read()
+        except Exception as e:
+            return f"Ошибка при чтении файла: {str(e)}"
+        return content
+    execute_readf.arg_names = ["file_name"]
     def execute_is_num(self, exec_ctx):
         is_number = isinstance(exec_ctx.symbol_table.get("value"), Number)
         return RTResult().success(Boolean.true if is_number else Boolean.false)
@@ -602,6 +619,8 @@ BuiltInFunction.rd = BuiltInFunction("rd")
 BuiltInFunction.rd_int = BuiltInFunction("rd_int")
 BuiltInFunction.clear = BuiltInFunction("clear")
 BuiltInFunction.os = BuiltInFunction("os")
+BuiltInFunction.writef = BuiltInFunction("write")
+BuiltInFunction.readf = BuiltInFunction("read")
 
 BuiltInFunction.is_num = BuiltInFunction("is_num")
 BuiltInFunction.is_int = BuiltInFunction("is_int")
@@ -645,6 +664,8 @@ global_symbol_table.set("rd_int", BuiltInFunction.rd_int)
 global_symbol_table.set("clear", BuiltInFunction.clear)
 global_symbol_table.set("cls", BuiltInFunction.clear)
 global_symbol_table.set("os", BuiltInFunction.os)
+global_symbol_table.set("read", BuiltInFunction.readf)
+global_symbol_table.set("write", BuiltInFunction.writef)
 global_symbol_table.set("lib", BuiltInFunction.lib)
 global_symbol_table.set("exit", BuiltInFunction.exit)
 # Datatype validator methods

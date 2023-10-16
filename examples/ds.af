@@ -1,0 +1,48 @@
+f division(dividend, divisor) {
+    v quotient = 0;
+    while dividend >= divisor {
+        dividend = dividend - divisor
+        quotient = quotient - -1
+    }
+    return quotient
+}
+f multiply(a, b) {
+    v result = 0
+    v sign = 1
+
+    if a < 0 {
+        a = -a
+        sign = -sign
+    }
+    
+    if b < 0 {
+        b = -b
+        sign = -sign
+    }
+
+    for i = 1 to b {
+        result = result + a
+    }
+
+    if sign < 0 {
+        result = -result
+    }
+
+    return result
+}
+
+f derivative(f, x0, h) {
+    v df = division((f(x0 - -h) - f(x0)), h);
+    return df
+}
+
+f my_function(x) {
+    return x  x
+}
+
+v x0 = 2
+v h = 0.0001
+
+v df = derivative(my_function, x0, h)
+op(df)
+

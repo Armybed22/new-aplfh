@@ -701,13 +701,19 @@ class Class(Value):
         # TODO: Some issue here when direct accessing class methods without instantiation
         inst = Instance(self)
         inst.symbol_table = SymbolTable(self.symbol_table)
-
+        global executed 
+        executed = False
         exec_ctx.symbol_table = inst.symbol_table
-        for name in self.symbol_table.symbols:
-            inst.symbol_table.set(name, self.symbol_table.symbols[name].copy())
-
-        for name in inst.symbol_table.symbols:
-            inst.symbol_table.symbols[name].set_context(exec_ctx)
+        if executed:
+            pass
+        else:
+            for name in self.symbol_table.symbols:
+                inst.symbol_table.set(name, self.symbol_table.symbols[name].copy())
+        if executed:
+            pass
+        else:
+            for name in inst.symbol_table.symbols:
+                inst.symbol_table.symbols[name].set_context(exec_ctx)
 
         inst.symbol_table.set('this', inst)
 

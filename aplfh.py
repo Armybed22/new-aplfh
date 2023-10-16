@@ -58,7 +58,7 @@ args = parser.parse_args()
 
 if args.source:
     result, error, should_exit = base_core.run(
-        '<stdin>', f'require("{args.source[0]}")')
+        '<stdin>', f'lib("{args.source[0]}")')
 
     if error:
         print(error.as_string())
