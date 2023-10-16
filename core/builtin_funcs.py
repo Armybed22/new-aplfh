@@ -114,6 +114,7 @@ class BuiltInFunction(BaseFunction):
     execute_os.arg_names = ["arg1"]
     def execute_writef(self, exec_ctx):
         file_name = exec_ctx.symbol_table.get("file_name")
+        data = exec_ctx.symbol_table.get("data")
         try:
             with open(file_name, 'w') as file:
                 file.write(data)
@@ -129,7 +130,8 @@ class BuiltInFunction(BaseFunction):
                 content = file.read()
         except Exception as e:
             return f"Ошибка при чтении файла: {str(e)}"
-        return RTResult().success(String(str(content)))
+        return content
+        return RTResult().success(String(""))
     execute_readf.arg_names = ["file_name"]
     def execute_is_num(self, exec_ctx):
         is_number = isinstance(exec_ctx.symbol_table.get("value"), Number)
