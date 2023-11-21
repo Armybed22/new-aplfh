@@ -71,23 +71,23 @@ class Math {
     
     }
 
-    f MultiComplex(r1, i1, r2, i2){
-        v multR = r1 * r2 - i1 * i2
-        v multI = i1 * r2 + r1 * i2
-        return [multR, multI]
-    }
-    f integrate(f, a, b, n) {
-
-        v delta_x = (b - a) / n  
-        v result = 0.0  
-
-        for i = 0 to n-1 {
-            v x_i = a + i * delta_x 
-            v x_i_plus_1 = a + (i + 1) * delta_x  
-            v midpoint = (x_i + x_i_plus_1) / 2  
-            v area = delta_x * f * midpoint  
-            v result = result + area  
-        }
-        return result
-    }
+#    f MultiComplex(r1, i1, r2, i2){
+#        v multR = r1 * r2 - i1 * i2
+#        v multI = i1 * r2 + r1 * i2
+#        return [multR, multI]
+#    }
+#    f integrate(f, a, b, n) {
+#
+#        v delta_x = (b - a) / n  
+#        v result = 0.0  
+#
+#        for i = 0 to n-1 {
+#            v x_i = a + i * delta_x 
+#            v x_i_plus_1 = a + (i + 1) * delta_x  
+#            v midpoint = (x_i + x_i_plus_1) / 2  
+#            v area = delta_x * f * midpoint  
+#            v result = result + area  
+#        }
+#        return result
+#    }
 }
